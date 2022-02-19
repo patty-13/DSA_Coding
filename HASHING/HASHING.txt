@@ -1,0 +1,184 @@
+/**
+ * HASHING IS ONLY USED FOR INSERTION, DELETION AND UPDATION
+ * unuseful for:
+ * Finding the closest value.           // here we use self balancing tree
+ * Keeping the data in the sorted order. // or avl tree
+ * Prefix searching (all the keys match to a prefix then also
+ * hashing is not good)
+ * o(1) avg
+ *  for prefix searching ]- trie for particularky for strings.
+ * 
+ * APPLICATIONS OF HASHING -(IT IS SECOND MOST USED DATASTRUCUTRE)
+ *  1. Implementing dictionary (Lookup in constant time) and search the 
+ *     variations also
+ *  2. Database indexing (B OR B+ TREES or hashing)
+ *  3. Cryptography
+ *  4. Caches
+ *  5. Compilers and interpreters use symbol tables basically hashes
+ *  
+ *  CONCEPT  (DIRECT ADDRESS TABLE)
+ *  IMAGINE A SITUATION WHERE YOU HAVE 1000 KEYS WITH VALUES FROM
+ *  (0 TO 999), how would you implement following in O(1) time
+ *  1. search
+ *  2. delete
+ *  3. insert
+ *  solution : create a boolean array of 0...
+ *  All the operations can be done in big O (1) time.
+ *  it cannot handle large values, if phone numbers are 10 digit numbers
+ *  large keys, and floating point numbers.
+ *  keys can be strings or addresses.
+ *  # HASHING (TAKE LARGE UNIVERSE OF KEYS)
+ *  |       |                                                |    |
+ *  |       | --> USE THE FUNCTION CALLED AS HASH FUNCTION-->|    |
+ *  |       |                                                |    |
+ *  SO basically the large keys are convereted into small values or
+ * keys, so this is the main function of hash funciton.
+ * 
+ * HASH FUNCTION WORKING :-> converting large keys, strings, floating
+ * point values into small keys that can be used to index the values in 
+ * the tables.
+ * Hash table should only generate the values from 0 to m-1 if the
+ * size of the table is m.
+ * Hash function should be fast.
+ * Should uniformly distribute the keys (most toughest part to achieve)
+ *  NOTES:
+ *  The hash table size is propotional to the keys you are going to insert 
+ *  in the table.
+ *      1. FOR LARGE integer KEYS LIKE PHONE NUMBER WE CAN DO MODULAR DIVISION
+ *       h(large_keys) = (large_key % m)
+ *      note: the "m" value is chosen particularly as a prime number close to the 
+ *      size of the table.
+ *      we choose prime numbers which are not close to powers
+ *      basically convert those phone numbers into indexes and store
+ *      like keys in the array, key value pairs like dictonary.
+ *     
+ *       2. For STRINGS, WEIGHTED SUM
+ *         str[] = "abcd"
+ *          (str[0]*x^0 + str[1]*x^1 + str[2]*x^2 + str[3]*x^3)%m where m = table size
+ *          so basically we take any x and do weighted sum so to avoid
+ *          permutations of the word to have same index.
+ *      
+ *      3. UNIVERSAL HASHING
+ *          A set of hash funcitons
+
+COLLISON HANDELING
+if we know keys in advance then we  can perfect hashing
+if we do not know keys, then we use one of the following
+-> chaining
+-> open addressing  -> Linear probling
+                    -> quadratic probling
+                    -> double hashing
+
+1. CHAINING
+    -> we maintain an array of linkedlist
+        hash(key) = key%7
+        keys = [50, 21, 58, 17, 15, 49, 56, 22, 23, 25]
+
+steps : 50%7 = remainder 1 so  hash(1) = 50 value will be stored
+        21%7 = rem 0 so hash(0) = 21
+        58%7 = rem 2 so hash(2) = 58
+        17%7 = rem 3 so hash(3) = 17
+        15%7 = rem 1 so hash(1) = 15
+        49%7 = rem 0 so hash(0) = 49
+        56%7 = rem 0 so hash(0) = 56
+        22%7 = rem 1 so hash(1) = 22
+        23%7 = rem 2 so hash(2) = 23
+        25%7 = rem 4 so hash(4) = 25
+        0|   21    |->| 49 |->| 56 |
+        1|   50    |->| 15 |->| 22 |
+        2|   58    |->| 23 |
+        3|   17    |
+        4|   25    |
+        5|         |
+        6|         |
+      (so basically this hashtable is array of linkedlist headers) 
+
+      m = no of sides in hash table
+      n =  no of keys to be inserted
+      lood factor  alpha  = n/m (important factor how big u want your hashtable to be)
+      if the size of the hashtable is small and m is big then we are likely to have more 
+      collisions.
+      exprected chain length  = aplha taking best case where each key goes to its position
+      and worst would be chained at one place.
+      estimated time to search  = o(1 + aplha)
+      estimated time to insert/ delete = o(1 + alpha)
+
+    NOTES: 
+        data structure for storing chains.
+        1. linked list 
+            (search O(l), Delete O(l), insert O(l), but linkedlist are not
+            cache friendly because the pointers are stored at different location)
+        2. dynamic sized arrays (vectors in c++, arraylist in java)
+        3. self balancing tree BST (AVL, red black tree) O(logl)->search, insert and delete
+
+    OPEN ADDRESSING:
+    -> ONLY USING SINGLE ARRAY AND NOT FORMING CHAINGING
+    -> no of slots in the hash table should be greater than no of keys to 
+    be inserted.
+    -> it is cache friendly
+    it can be done by three methods:
+        -> linear probling -> linearly search for next empty slot to avoid collision.
+        -> double hashing ->
+        -> quadratic hashing
+        in linear probing if there is no space then we will circularly check of 
+        avaiable space to fill the values in it.
+
+        search :  we compute the hash funciton
+                  we go to the index and compare,
+                  if we find we return three, otherwise
+                  we linearly hash. We stop when one of
+                  three cases arrive 
+                  1. Empty slot  -> return false
+                  2. key found
+                  3. traveresed through the whole table. -> return false
+
+                  when we delete the the value in hash table, we mark it as
+                  delete, so that when searching we will consider it as deleted
+                  but when inserted we will consider it as empty.
+
+                 A problem with linear probing, is clustering 
+                 How to handle clustering problem with linear probing ?
+
+                in linear probing = hash(key, i) = (h(key) + i)% m
+
+                 1. quadratic probing (what we doing is we are taking position value as square
+                 because it will help not form cluster or gather of keys at same position while 
+                 inserting.) (secondary clusters are formed, it might not find empty slot)
+
+NOTE : THE VALUE OF load factor SHOULD BE < 0.5 OR m SHOULD BE A PRIME NUMEBR THEN ONLY IT WILL FIND Empty
+slot AT ITS BEST. IN CASE OF QUADRITIC PROBING THE PROBLEM STILL OCCURS THAT THE VALUE WILL
+then only quadratic probing works.
+
+double size, and m should be prime.
+
+                    -> hash(key,i) = (h(key) + i^2)%m 
+                 2. Double hashing
+                    -> hash(key, i) = (h1(key) + i*h2(key))%m
+
+                    -> if h2(key) is realtively prime to m, ehtn it always find a free slot
+                    if there is one.
+                    hash(key,i) = (h1(key) + i*h2(key))%m
+                                  (0 + 1 * 4)%7
+
+                    h1(key) = (key%7)
+                    h2(key) = 6 - (key%6)
+                    why h2(key) and m should be realtively prime?
+                    then we will always find a free slot.
+
+                    code : void double_hashing(key)
+                    {
+                        if (table is full)
+                            return error;
+                        prob = h1(key);
+                        offset = h2(key);
+                        if(table[probe] is occupied)
+                            prob = (probe + offset)%m;
+                        table[probe] = key;
+                    }
+                    performance analysis of search
+                    alpha = n/m (should be <=1)
+                    assumption : every probe sequence looks at a random location
+                    (1 - alpha) fraction of the table is empty
+                    excepted number of probes required = 1/1-alpha
+                    
+ * */ 
