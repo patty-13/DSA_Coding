@@ -1,0 +1,49 @@
+WE CANNOT USE VECOTR, ARRAYS, FOR HIERCHIAL PURPOSE
+TREE IS A NON LINEAR DATA STRUCTURE, 
+AT THE TOP OF THE HIERCHIAL IS ROOT NODE,
+AND THE NODES AT THE BOTTOM OF THE HIERICHARY IS CALLED LEAF NODES
+NODES BELOW THE NODES ARE CALLED IS CHILD NODE,
+PARENT IS ABOVE THE NODE IS CALLED PARENT
+
+TREE data strucutre is recursive in nature.
+trees contian trees inside the tree called subtrees
+descendant of the tree is are the roots that lie in the subtrees 
+of the root.
+
+degree of a node - number of childern it has.
+leaf nodes have degree with 0
+internal nodes, the leafs that dont have degree 0 is called internal
+nodes.
+
+
+APPLICATION OF TREE DATASTRUCUTRE:
+-> to represent hierarchial data
+    -> organization strucutre
+    -> folder strucutre
+    -> xml/html content (JSON objects)
+    -> In OOP (Inhertiance)
+-> Binary search tree
+-> Binary heap (mainly used to represent priorties ques), and this
+is used in disjkarta algorithm and huffman algorithm., prims algorithm
+-> B aur B+ trees in dbms
+-> in computer networks spanning and shortest path
+-> parse tree and expression tree in compilers.
+
+
+variations of trees
+-> Trie (is used to represent dictonaries, it also supports operations like
+    prefix search)
+-> Suffix tree (used fast seraches in a tree, you have a pattern and a big text
+    )
+-> binary indexed tree -> searches in a range.
+-> segment tree -> searches in a range.
+
+
+BINARY TREE
+Every node has at-most two childern
+ left child pointer ->   |    |  30   |    | <- right child pointer
+                           /              \
+                  |    |  40   | null |  |  | 50  |    |            
+for leafs 
+There is array represntation of trees, such as binary heaps
+But binary trees are
