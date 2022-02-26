@@ -41,9 +41,46 @@ variations of trees
 
 BINARY TREE
 Every node has at-most two childern
- left child pointer ->   |    |  30   |    | <- right child pointer
+ left child pointer ->   |    |  30  |    | <- right child pointer
                            /              \
-                  |    |  40   | null |  |  | 50  |    |            
+                  |    | 40 | null |  |  | 50  |    |            
 for leafs 
 There is array represntation of trees, such as binary heaps
 But binary trees are
+
+TREES TRAVERSAL
+Printing all the keys excatly once, is called tree traversal.
+-> tree traversal can be classified broadly in two terms
+-> breath first (or level order)
+-> depth first
+        -> inorder
+        -> preorder
+        -> postorder
+
+
+BREATH FIRST -> GO TO ROOT THEN MOVE TO NEXT LEVEL, MOVE FROM
+ TRAVERSAL   -> LEFT TO RIGHT PRINT THOSE ELEMENT.
+             -> THEN MOVE TO NEXT LEVEL AND READ NEXT NODES.
+             TOP TO BOTTOM.
+DEPTH FIRST -> PROCESS THE ROOT NODE
+            -> WE PROCESS THE LEFT SUB TREE AS WE PROCESS THE WHOLE TREE
+            -> DO SAME THING WITH RIGHT SUB TREE.
+
+Recursive -> Traverse root
+          -> traverse left subtrees
+          -> traverse right subtrees
+          so there are factorial 3 to travers the tree.
+out of these 6 permutations the three are popular permutations.
+-> inorder (Left Root Right)
+-> preorder (Root Left Right)
+-> postorder (left right root)
+    left -> left subtree
+    right -> right subtree
+                    10
+                   /  \
+                  20  30
+    inorder: 20 10 30
+    preorder: 10 20 30
+    postorder: 20 30 10
+
+
