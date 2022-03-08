@@ -12,7 +12,7 @@ struct node
         left = right = NULL;
     }
 };
-void max_width(node *root)
+int max_width(node *root)
 {
     if(root == NULL)
     {
@@ -20,10 +20,26 @@ void max_width(node *root)
     }
     queue<node *> q;
     q.push(root);
+    int res = 0;
     while(q.empty() == false)
     {
-        node *curr = q.front();
+        int count = q.size();
+        res = max(res,count);
+        for(int i = 0 ; i < count ; i++)
+        {
+            node *curr = q.front();
+            q.pop();
+            if(curr->left != NULL)
+            {
+                q.push(curr->left);
+            }
+            if(curr->right != NULL)
+            {
+                q.push(curr->right);
+            }
+        }
     }
+    return res;
 }
 int main()
 {
@@ -35,5 +51,5 @@ int main()
     root->left->left= new node(90);
     root->right->right = new node(70);
     root->right->left = new node(300);
-    max_width(root);
+    cout<<max_width(root);
 }
