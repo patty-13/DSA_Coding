@@ -26,6 +26,16 @@ int diameter(node *root)
     int d3 = diameter(root->right);
     return max(d1,max(d2,d3));
 }
+// efficient code
+int res = 0;
+int height(node *root)
+{
+    if(root == NULL) {return 0;}
+    int lh = height(root->left);
+    int rh = height(root->right);
+    res = max(res, lh+rh+1);
+    return 1 + max(lh,rh);
+}
 int main()
 {
 
