@@ -1,0 +1,13 @@
+RECURSION IS BASICALLY CALLING THE FUNCTION ITSELF
+1. HELPFUL in dfs, bfs if using without any 
+TAIL RECURSION:
+if all the statements are being invoked before the function call 
+itsself then its called a tail recursion.
+
+so tail recursion is better than the non tail recursion as it 
+can be optimized by the compiler. 
+As the recurison function is in the last so the compiler doesnt 
+save the recursive stack.
+
+-> so to make a non-tail recursive argument into recursive 
+argument just make a new argument and store its value in it.

@@ -33,11 +33,11 @@ int count_Hashmap(vector<int> &a)
     }
     return m.size();
 }
-int imp_count_hashmap(vector<int> &a)
-{
-    //unordered_set<int> m(a,a+a.size());
-    //return m.size();
-}
+// void imp_count_hashmap(vector<int> &a)
+// {
+//     //unordered_set<int> m(a,a+a.size());
+//     //return m.size();
+// }
 int main()
 {
     int n;
@@ -52,5 +52,5 @@ int main()
     cout<<"HASH METHOD";
     cout<<count_Hashmap(a);
     cout<<"IMPROVED METHOD";
-    cout<<imp_count_hashmap(a);
+    //cout<<imp_count_hashmap(a);
 }
